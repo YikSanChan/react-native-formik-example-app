@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { Picker, StyleSheet, View } from "react-native";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import {
@@ -17,6 +17,18 @@ const TextInputField = ({ label, value, error, handleChange }) => (
   </View>
 );
 
+const PickerInputField = ({ label, value, error, handleChange, options }) => (
+  <View>
+    <FormLabel>{label}</FormLabel>
+    <Picker selectedValue={value} onValueChange={handleChange}>
+      {options.map((option, i) => (
+        <Picker.Item key={i} label={option.label} value={option.value} />
+      ))}
+    </Picker>
+    <FormValidationMessage>{error}</FormValidationMessage>
+  </View>
+);
+
 export default class App extends React.Component {
   handleSubmit = values => {
     alert(JSON.stringify(values, null, 2));
@@ -29,7 +41,8 @@ export default class App extends React.Component {
           initialValues={{
             name: "iPhone X",
             price: "1000",
-            owner: "jackdorsey@twitter.com"
+            owner: "jackdorsey@twitter.com",
+            status: "0"
           }}
           isInitialValid={true}
           onSubmit={this.handleSubmit}
@@ -62,6 +75,17 @@ export default class App extends React.Component {
                 value={values.owner}
                 error={errors.owner}
                 handleChange={handleChange("owner")}
+              />
+              <PickerInputField
+                label="status"
+                value={values.status}
+                error={errors.status}
+                handleChange={handleChange("status")}
+                options={[
+                  { label: "New", value: "0" },
+                  { label: "Donated", value: "1" },
+                  { label: "Ebay", value: "2" }
+                ]}
               />
               <Button
                 title="Submit"
