@@ -14,6 +14,7 @@ import {
   FormLabel,
   FormValidationMessage
 } from "react-native-elements";
+import { ImageInputField } from "./components/ImageInputField";
 
 const TextInputField = ({ label, value, error, handleChange }) => (
   <View>
@@ -57,7 +58,8 @@ export default class App extends React.Component {
             price: "1000",
             owner: "jackdorsey@twitter.com",
             status: "0",
-            purchasedAt: new Date()
+            purchasedAt: new Date(),
+            photo: null
           }}
           isInitialValid={true}
           onSubmit={this.handleSubmit}
@@ -107,6 +109,11 @@ export default class App extends React.Component {
                 value={values.purchasedAt}
                 error={errors.purchasedAt}
                 handleChange={value => setFieldValue("purchasedAt", value)}
+              />
+              <ImageInputField
+                label="Photo"
+                value={values.photo}
+                handleChange={value => setFieldValue("photo", value)}
               />
               <Button
                 title="Submit"
