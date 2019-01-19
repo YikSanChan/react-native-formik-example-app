@@ -1,48 +1,14 @@
 import React from "react";
-import {
-  DatePickerIOS,
-  Picker,
-  ScrollView,
-  StyleSheet,
-  View
-} from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import { Button } from "react-native-elements";
 import {
-  Button,
-  FormInput,
-  FormLabel,
-  FormValidationMessage
-} from "react-native-elements";
-import { ImageInputField } from "./components/ImageInputField";
-
-const TextInputField = ({ label, value, error, handleChange }) => (
-  <View>
-    <FormLabel>{label}</FormLabel>
-    <FormInput value={value} onChangeText={handleChange} />
-    <FormValidationMessage>{error}</FormValidationMessage>
-  </View>
-);
-
-const PickerInputField = ({ label, value, error, handleChange, options }) => (
-  <View>
-    <FormLabel>{label}</FormLabel>
-    <Picker selectedValue={value} onValueChange={handleChange}>
-      {options.map((option, i) => (
-        <Picker.Item key={i} label={option.label} value={option.value} />
-      ))}
-    </Picker>
-    <FormValidationMessage>{error}</FormValidationMessage>
-  </View>
-);
-
-const DatePickerInputField = ({ label, value, error, handleChange }) => (
-  <View>
-    <FormLabel>{label}</FormLabel>
-    <DatePickerIOS date={value} onDateChange={handleChange} />
-    <FormValidationMessage>{error}</FormValidationMessage>
-  </View>
-);
+  DatePickerInputField,
+  ImageInputField,
+  PickerInputField,
+  TextInputField
+} from "./components/Fields";
 
 export default class App extends React.Component {
   handleSubmit = values => {
